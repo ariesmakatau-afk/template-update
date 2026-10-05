@@ -1,12 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { isStaff } from "@/lib/requireStaff";
+import { isAdmin } from "@/lib/requireStaff";
 import { isConfigured, select, update } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  if (!(await isStaff())) return NextResponse.json({ error: "Not signed in." }, { status: 401 });
+  if (!(await isAdmin())) return NextResponse.json({ error: "Admin only." }, { status: 401 });
   if (!isConfigured()) return NextResponse.json({ enquiries: [] });
   try {
     const enquiries = await select("enquiries", "order=created_at.desc&limit=50");
@@ -19,7 +19,7 @@ export async function GET() {
 
 /** Mark an enquiry handled (or not). */
 export async function PATCH(request: NextRequest) {
-  if (!(await isStaff())) return NextResponse.json({ error: "Not signed in." }, { status: 401 });
+  if (!(await isAdmin())) return NextResponse.json({ error: "Admin only." }, { status: 401 });
   let body: Record<string, unknown>;
   try {
     body = await request.json();

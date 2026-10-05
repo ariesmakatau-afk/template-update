@@ -73,13 +73,17 @@ on conflict (key) do nothing;
 create table if not exists push_subscriptions (
   id         bigint generated always as identity primary key,
   order_ref  text not null,
-  endpoint   text not null unique,
+  endpoint   text not null,
   p256dh     text not null,
   auth       text not null,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
 create index if not exists push_subscriptions_ref_idx on push_subscriptions (order_ref);
+-- One device can follow the kitchen AND any number of orders. (Older setups
+-- had endpoint unique, so a second order silently replaced the first.)
+alter table push_subscriptions drop constraint if exists push_subscriptions_endpoint_key;
+create unique index if not exists push_subscriptions_ref_endpoint_idx on push_subscriptions (order_ref, endpoint);
 alter table push_subscriptions enable row level security;
 
 -- ---------------------------------------------------------------------------

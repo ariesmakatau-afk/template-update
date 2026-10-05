@@ -59,7 +59,7 @@ const ORDER_REF_RE = /^([0-9a-f-]{36}|kitchen)$/i;
 
 type Row = { endpoint: string; p256dh: string; auth: string };
 
-/** Store a device's subscription for an order (idempotent on endpoint). */
+/** Store a device's subscription for an order (idempotent per order + device). */
 export async function subscribe(
   orderRef: string,
   endpoint: string,
@@ -71,7 +71,7 @@ export async function subscribe(
     await upsert(
       TABLE,
       { order_ref: orderRef, endpoint, p256dh: keys.p256dh, auth: keys.auth, updated_at: new Date().toISOString() },
-      "endpoint"
+      "order_ref,endpoint"
     );
     return true;
   } catch (err) {
@@ -83,7 +83,7 @@ export async function subscribe(
 export async function unsubscribe(orderRef: string, endpoint: string): Promise<void> {
   if (!isConfigured() || !endpoint) return;
   try {
-    await remove(TABLE, `endpoint=eq.${encodeURIComponent(endpoint)}`);
+    await remove(TABLE, `order_ref=eq.${encodeURIComponent(orderRef)}&endpoint=eq.${encodeURIComponent(endpoint)}`);
   } catch (err) {
     console.error("[push] unsubscribe failed:", err);
   }
@@ -128,6 +128,8 @@ export async function pushToOrder(
         if (code === 404 || code === 410) {
           await unsubscribe(orderRef, r.endpoint).catch(() => {});
           pruned++;
+        } else {
+          console.error(`[push] send to ${orderRef} failed (${code ?? "no status"}):`, err);
         }
       }
     })

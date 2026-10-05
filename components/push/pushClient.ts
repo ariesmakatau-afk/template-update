@@ -98,11 +98,18 @@ export async function enablePushFor(orderRef: string): Promise<PushMode> {
       });
     }
     const json = sub.toJSON() as unknown as { endpoint: string; keys?: { p256dh?: string; auth?: string } };
-    await fetch("/api/push", {
+    const saved = await fetch("/api/push", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ type: "subscribe", orderRef, endpoint: json.endpoint, keys: json.keys }),
     });
+    // Only claim "push" once the server has actually stored the device —
+    // otherwise the switch says ON while nothing is ever sent.
+    const result = await saved.json().catch(() => ({}));
+    if (!saved.ok || result?.ok !== true) {
+      remember(orderRef, "tab");
+      return "tab";
+    }
     remember(orderRef, "push");
     return "push";
   } catch (err) {

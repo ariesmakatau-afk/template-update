@@ -39,7 +39,7 @@ export function adelaideClock(date = new Date()): Clock {
 
 /** "7:12 pm" from a seconds-of-day value. */
 export function formatClockTime(secOfDay: number): string {
-  return formatTime(Math.floor(secOfDay / MIN) * MIN);
+  return formatTime(Math.floor(secOfDay / MIN));
 }
 
 /** A countdown that breathes: "2h 14m", or "9m 04s" once the hour is gone. */

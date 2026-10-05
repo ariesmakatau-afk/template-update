@@ -41,12 +41,12 @@ export default function PhotoWall({ kind, initial, limit }: { kind: "team" | "cu
       }
       setCaption("");
       setName("");
+      const skipped = list.length - batch.length;
       setMsg({
         ok: true,
         text:
-          batch.length === 1
-            ? "Added — it's live. Empty slots are never shown on the site."
-            : `Added ${batch.length} photos. Only these show on the site — no empty placeholders.`,
+          (batch.length === 1 ? "Added — it's live." : `Added ${batch.length} photos — they're live.`) +
+          (skipped > 0 ? ` ${skipped} left out: this wall holds ${limit}.` : ""),
       });
     } catch (err) {
       setMsg({ ok: false, text: err instanceof Error ? err.message : "Upload failed." });

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { requireStaffPage } from "@/lib/requireStaff";
 import { isConfigured, select } from "@/lib/supabase";
 import { MAX_SESSIONS } from "@/lib/session";
+import { pushReady } from "@/lib/push";
 import { readOrderingSettings, readPhotos } from "@/lib/content-store";
 import AdminPanel, { type Enquiry, type TodayStats } from "@/components/staff/AdminPanel";
 
@@ -45,6 +46,9 @@ export default async function AdminPage() {
     };
   }
 
+  // Push needs the VAPID keys AND the push_subscriptions table from the schema.
+  const pushTable = pushReady() && (await select("push_subscriptions", "select=id&limit=1").then(() => true, () => false));
+
   const setup = {
     database: db,
     staffLogin: db && Boolean(process.env.STAFF_PASSWORD && process.env.STAFF_SESSION_SECRET),
@@ -52,6 +56,7 @@ export default async function AdminPage() {
     adminLogin: db && Boolean(process.env.STAFF_SESSION_SECRET) && (process.env.ADMIN_PASSWORD?.length ?? 0) >= 12,
     phoneAlerts: Boolean(process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID),
     weeklyEmail: Boolean(process.env.RESEND_API_KEY && process.env.DIGEST_EMAIL_TO && process.env.DIGEST_EMAIL_FROM && process.env.CRON_SECRET),
+    lockScreenPush: pushTable,
   };
 
   return <AdminPanel team={team} customers={customers} ordering={ordering} enquiries={enquiries} stats={stats} setup={setup} maxSessions={MAX_SESSIONS} />;

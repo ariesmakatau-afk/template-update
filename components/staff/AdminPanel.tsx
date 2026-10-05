@@ -31,7 +31,7 @@ export type TodayStats = {
   value: number;
 };
 
-type Setup = { database: boolean; staffLogin: boolean; adminLogin: boolean; phoneAlerts: boolean; weeklyEmail: boolean };
+type Setup = { database: boolean; staffLogin: boolean; adminLogin: boolean; phoneAlerts: boolean; weeklyEmail: boolean; lockScreenPush: boolean };
 
 const SECTIONS = [
   { id: "today", label: "Today" },
@@ -178,7 +178,7 @@ export default function AdminPanel({
             <p className="mb-5 mt-1 text-sm text-muted">
               Shown on the Parea page and the home page as &ldquo;The team&rdquo;. Ask before posting anyone — and take it down if they leave.
             </p>
-            <PhotoWall kind="team" initial={team} limit={12} />
+            <PhotoWall kind="team" initial={team} limit={4} />
           </section>
 
           {/* Customers */}
@@ -187,7 +187,7 @@ export default function AdminPanel({
             <p className="mb-5 mt-1 text-sm text-muted">
               Regulars, first-timers, big nights. Shown on the Parea page and the home page. Always get a spoken yes before posting a face.
             </p>
-            <PhotoWall kind="customers" initial={customers} limit={24} />
+            <PhotoWall kind="customers" initial={customers} limit={4} />
           </section>
 
           {/* Catering */}
@@ -252,6 +252,7 @@ export default function AdminPanel({
                 ["Admin password", setup.adminLogin, "Never locked out — make it 12+ characters"],
                 ["New-order alerts to the phone", setup.phoneAlerts, "Telegram message for every order"],
                 ["Weekly order email", setup.weeklyEmail, "Sunday summary of the week's orders"],
+                ["Lock-screen push", setup.lockScreenPush, "VAPID keys in Vercel + push table from the schema file"],
               ].map(([label, ok, note]) => (
                 <li key={label as string} className="flex items-start gap-3 rounded-2xl border border-line p-3.5">
                   <span className={`mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full text-xs font-bold text-white ${ok ? "bg-green-600" : "bg-ember"}`}>

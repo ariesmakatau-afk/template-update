@@ -21,7 +21,7 @@ export const PHOTO_KEYS: Record<PhotoKind, string> = {
   customers: "parea_photos",
 };
 
-export const PHOTO_LIMITS: Record<PhotoKind, number> = { team: 12, customers: 24 };
+export const PHOTO_LIMITS: Record<PhotoKind, number> = { team: 4, customers: 4 };
 
 type ReadOpts = { revalidate?: number };
 

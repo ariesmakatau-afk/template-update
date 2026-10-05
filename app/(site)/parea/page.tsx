@@ -37,6 +37,8 @@ export default async function PareaPage() {
         lede="Your people — the ones who know your order and hold a seat without being asked. English borrowed yiros and stopped there. It never took the word for who you eat it with."
       />
 
+      {/* Each section only exists once it has photos — no empty boxes on the site. */}
+      {team.length > 0 && (
       <section className="section bg-white">
         <div className="container-x">
           <div className="grid items-end gap-6 lg:grid-cols-[1fr_auto]">
@@ -51,15 +53,13 @@ export default async function PareaPage() {
             </p>
           </div>
           <div className="mt-12">
-            {team.length > 0 ? (
-              <TeamGrid photos={team} />
-            ) : (
-              <p className="rounded-2xl border border-dashed border-line p-8 text-center text-sm text-muted">Photos of the crew go up from the admin page — none live yet.</p>
-            )}
+            <TeamGrid photos={team} />
           </div>
         </div>
       </section>
+      )}
 
+      {customers.length > 0 && (
       <section className="section surface-porcelain overflow-hidden">
         <div className="container-x">
           <GreekKey tone="blue" className="!h-2.5 opacity-40" />
@@ -76,16 +76,11 @@ export default async function PareaPage() {
             </p>
           </div>
           <div className="mt-14">
-            {customers.length > 0 ? (
-              <CustomerWall photos={customers} />
-            ) : (
-              <p className="rounded-2xl border border-dashed border-line p-8 text-center text-sm text-muted">
-                The wall stays empty until a photo is uploaded. Ask at the counter if you want to be on it.
-              </p>
-            )}
+            <CustomerWall photos={customers} />
           </div>
         </div>
       </section>
+      )}
 
       <section className="section bg-white">
         <div className="container-x grid items-center gap-12 lg:grid-cols-[auto_1fr]">
