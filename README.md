@@ -29,7 +29,7 @@ Deploys to Vercel as a standard Next.js project.
 | Staff (password, not indexed) | |
 |---|---|
 | `/staff` | Sign in — 5 tries per device, then a 15-minute lock; at most 3 devices signed in at once |
-| `/kitchen` | **Kitchen tab** — animated tickets with live wait pills; accept with a wait time, ±5/±10 pushes, reject, mark collected; pause online orders; set a whole-shop pacing buffer (+0–20 min on every customer's wait); broadcast a sold-out line to the menu/checkout; alert sound with volume, LOUD mode that repeats until ACK, and browser device alerts |
+| `/kitchen` | **Kitchen tab** — one big button per ticket: **Accept** opens a time picker and only accepts when you confirm, then **Collected**. A **⋯** menu per order holds more time, change amounts, sold out, pause online orders and reject. **⚙ Settings** holds pacing (+0–20 min), the sold-out line, pause, the alarm (fire-alarm tone by default, repeats until silenced, red screen flash) and phone alerts. No Admin tab — staff can't reach admin. |
 | `/admin` | **Admin tab** — today's numbers, online-ordering switch, staff photos, customer wall, catering enquiries, signed-in devices (sign any device out), setup checklist |
 
 There's a small "Staff" link in the footer.
@@ -47,7 +47,7 @@ There's a small "Staff" link in the footer.
 1. Customer adds items on `/menu` and checks out (name, mobile, pickup time). **No online payment** — they pay at the counter.
 2. The server **re-prices every line from the menu** (the browser's prices are never trusted) and rejects anything the menu doesn't allow.
 3. The order is saved, and a message goes to the shop phone (Telegram).
-4. The kitchen board beeps. Staff tap a wait time (10/15/20/30/45 min) to accept.
+4. The kitchen alarm goes off. Staff tap **Accept**, pick a wait (10/15/20/30/45 min, ±5), and confirm.
 5. The customer's tracking page updates to "About 15 minutes". Staff mark it collected.
 6. Every Sunday night, an email summarises the week's orders (orders are kept, never deleted).
 

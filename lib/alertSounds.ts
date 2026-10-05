@@ -3,10 +3,11 @@
 // Kitchen alerts generated in Web Audio — no files to 404. Built to punch
 // through a charcoal grill, extractor fan and a Hindley Street Friday.
 
-export type AlertSoundId = "siren" | "triple" | "klaxon" | "double" | "bell" | "chime";
+export type AlertSoundId = "alarm" | "siren" | "triple" | "klaxon" | "double" | "bell" | "chime";
 
 export const ALERT_SOUNDS: { id: AlertSoundId; label: string; note: string }[] = [
-  { id: "siren", label: "Wake-the-dead siren", note: "Default. Relentless two-tone + noise." },
+  { id: "alarm", label: "Fire alarm", note: "Default. Smoke-alarm pitch, clipped hard. Loudest." },
+  { id: "siren", label: "Wake-the-dead siren", note: "Relentless two-tone + noise." },
   { id: "klaxon", label: "Klaxon", note: "Harsh falling buzzer." },
   { id: "triple", label: "Triple pulse", note: "Three hard hits." },
   { id: "double", label: "Double beep", note: "Clear, less aggressive." },
@@ -14,7 +15,7 @@ export const ALERT_SOUNDS: { id: AlertSoundId; label: string; note: string }[] =
   { id: "chime", label: "Rising chime", note: "Quiet rooms only." },
 ];
 
-export const DEFAULT_SOUND: AlertSoundId = "siren";
+export const DEFAULT_SOUND: AlertSoundId = "alarm";
 
 const VOL_KEY = "yiannis_alert_vol";
 
@@ -48,9 +49,35 @@ function ctx(): AudioContext | null {
   }
 }
 
-function chain(ac: AudioContext) {
+// Hard-clip curve: square-ish waves pushed past full scale come out as loud
+// as the speaker can go — perceived loudness, not just peak level.
+let clipCurve: Float32Array | null = null;
+function clip(ac: AudioContext): WaveShaperNode {
+  if (!clipCurve) {
+    clipCurve = new Float32Array(1024);
+    for (let i = 0; i < 1024; i++) {
+      const x = (i / 1023) * 2 - 1;
+      clipCurve[i] = Math.max(-0.92, Math.min(0.92, x * 3));
+    }
+  }
+  const ws = ac.createWaveShaper();
+  ws.curve = clipCurve;
+  return ws;
+}
+
+function chain(ac: AudioContext, drive = false) {
   const vol = ac.createGain();
   vol.gain.value = Math.min(1, getAlertVolume() * 1.15);
+  if (drive) {
+    // Volume still sets the level AFTER the clipper, so the slider works.
+    const pre = ac.createGain();
+    pre.gain.value = 2.5;
+    const ws = clip(ac);
+    pre.connect(ws);
+    ws.connect(vol);
+    vol.connect(ac.destination);
+    return pre;
+  }
   const comp = ac.createDynamicsCompressor();
   comp.threshold.value = -18;
   comp.knee.value = 6;
@@ -125,10 +152,23 @@ export function playAlert(id: AlertSoundId = DEFAULT_SOUND): void {
   try {
     const ac = ctx();
     if (!ac) return;
-    const dest = chain(ac);
+    const dest = chain(ac, id === "alarm" || id === "siren" || id === "klaxon");
     const t = ac.currentTime + 0.01;
 
     switch (id) {
+      case "alarm": {
+        // Smoke-alarm territory (~3.1kHz, where hearing peaks and kitchen
+        // rumble doesn't reach), chopped at 8 beats a second with a dissonant
+        // partner tone. Just under 1.5s, so the loop is close to continuous.
+        for (let i = 0; i < 12; i++) {
+          const at = t + i * 0.12;
+          const f = i % 2 ? 3500 : 2900;
+          tone(ac, dest, at, f, 0.085, "square", 1);
+          tone(ac, dest, at, f * 1.06, 0.085, "sawtooth", 0.6);
+        }
+        noiseBurst(ac, dest, t, 0.08, 0.6);
+        break;
+      }
       case "siren": {
         // Four two-tone hits plus a noise slap. Hard to talk over, harder to ignore.
         for (let i = 0; i < 4; i++) {
@@ -173,7 +213,21 @@ export function playAlert(id: AlertSoundId = DEFAULT_SOUND): void {
 /**
  * Repeat an alert until ACK. Returns the stop function.
  */
-export function startUrgentLoop(id: AlertSoundId = DEFAULT_SOUND, everyMs = 1800): () => void {
+/** A short, bright "done" for a confirmed tap — the reward, not the alarm. */
+export function playConfirm(): void {
+  try {
+    const ac = ctx();
+    if (!ac) return;
+    const dest = chain(ac);
+    const t = ac.currentTime + 0.01;
+    noiseBurst(ac, dest, t, 0.03, 0.25);
+    tone(ac, dest, t, 1047, 0.12, "triangle", 0.7);
+    tone(ac, dest, t + 0.08, 1568, 0.28, "triangle", 0.75);
+    tone(ac, dest, t + 0.08, 2093, 0.22, "sine", 0.3);
+  } catch {}
+}
+
+export function startUrgentLoop(id: AlertSoundId = DEFAULT_SOUND, everyMs = 1500): () => void {
   let stopped = false;
   const beat = () => {
     if (stopped) return;

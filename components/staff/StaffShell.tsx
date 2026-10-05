@@ -36,7 +36,7 @@ export default function StaffShell({
   return (
     <div className={dark ? "min-h-[100svh] bg-char-900 text-white" : "min-h-[100svh] bg-porcelain"} data-tone={dark ? "dark" : undefined}>
       <header className={`sticky top-0 z-30 border-b backdrop-blur ${dark ? "border-white/10 bg-char-900/90" : "border-line bg-white/90"}`}>
-        <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-3 px-4 py-3 sm:px-6">
+        <div className="mx-auto flex max-w-[1400px] items-center gap-3 px-4 py-3 sm:px-6">
           <Link href="/" className="flex items-center gap-2.5" title="View the website">
             <span className="relative block h-9 w-9 overflow-hidden rounded-full shadow-[0_0_0_1.5px_var(--blue)]">
               <Image src="/images/medallion-192.png" alt="" fill sizes="36px" />
@@ -70,7 +70,7 @@ export default function StaffShell({
               })}
             </nav>
           )}
-          <div className="ml-auto flex flex-wrap items-center gap-2">
+          <div className="ml-auto flex min-w-0 flex-wrap items-center justify-end gap-2">
             {right}
             <button
               type="button"
