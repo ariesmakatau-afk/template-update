@@ -58,7 +58,7 @@ export const award = {
 export const heroVideo: { src: string | null; webm: string | null; poster: string } = {
   src: "/video/spits.mp4",
   webm: null, // e.g. "/video/spits.webm"
-  poster: "/images/charcoal-yiros-wide.jpg",
+  poster: "/images/lamb-plate.jpg",
 };
 
 /** Client-confirmed: only the lamb is claimed as halal; show it as a compact sticker. */

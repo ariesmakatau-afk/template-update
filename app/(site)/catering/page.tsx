@@ -44,7 +44,7 @@ export default function CateringPage() {
           </>
         }
         lede="Office lunches, birthdays, footy nights, wakes and big family dinners. The same charcoal yiros Hindley Street queues for, by the tray."
-        image={<Image src="/images/platters.jpg" alt="" fill priority sizes="100vw" className="object-cover" />}
+        image={<Image src="/images/spread-hero.jpg" alt="" fill priority sizes="100vw" className="object-cover" />}
       >
         <div className="fade-up mt-8 flex flex-wrap gap-3" style={{ "--d": "380ms" } as React.CSSProperties}>
           <a href="#enquire" className="btn btn-fire">

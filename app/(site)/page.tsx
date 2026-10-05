@@ -37,22 +37,22 @@ const byId = (id: string) => allProducts.find((p) => p.id === id)!;
 const signatures = [
   {
     product: byId("yiros"),
-    img: "/images/yiros.jpg",
-    alt: "A charcoal lamb and chicken yiros wrapped in paper on the counter at Yianni's",
+    img: "/images/yiros-wrap.jpg",
+    alt: "A charcoal yiros with tomato and lettuce, wrapped in Yianni's paper",
     tag: "The signature",
     line: "Lettuce, tomato, onion, garlic sauce and lemon, wrapped around meat carved straight off the spit.",
   },
   {
     product: byId("ab-pack"),
-    img: "/images/ab-pack.jpg",
-    alt: "An AB Pack: charcoal meat over chips with garlic and chilli sauce",
+    img: "/images/ab-pack-box.jpg",
+    alt: "An AB Pack in its box: charcoal meat over chips with garlic and chilli sauce",
     tag: "Three sauces",
     line: "Chips on the bottom, meat on top, three sauces over everything. Adelaide's gift to the world.",
   },
   {
     product: byId("platter"),
-    img: "/images/platters.jpg",
-    alt: "A spread of platters: charcoal meats, salad, chips and oregano pita",
+    img: "/images/platter-blue.jpg",
+    alt: "A platter of charcoal meat and salad with pita on a blue Greek-key plate",
     tag: "Dine-in",
     line: "Meat, salad, pita, garlic sauce and lemon — for sitting down, taking your time and sharing badly.",
   },
@@ -260,8 +260,8 @@ export default async function HomePage() {
               <div className="arch-frame">
                 <div className="arch aspect-[4/5]" data-tone="dark">
                   <Image
-                    src="/images/yiros.jpg"
-                    alt="A charcoal yiros on the counter, the spit turning behind it"
+                    src="/images/saucing-pita.jpg"
+                    alt="Garlic sauce going onto a loaded pita on the counter at Yianni's"
                     fill
                     sizes="(min-width: 1024px) 420px, 90vw"
                     className="arch__img object-[50%_60%]"
@@ -374,8 +374,8 @@ export default async function HomePage() {
             <div className="relative" data-reveal="scale">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[30px] shadow-[0_0_0_1px_rgba(255,255,255,.12),0_40px_80px_-30px_rgba(255,90,20,.45)]">
                 <Image
-                  src="/images/charcoal-yiros-wide.jpg"
-                  alt="A yiros in front of the spit and the shop's blue 'If it's not charcoal' banner"
+                  src="/images/meat-pack.jpg"
+                  alt="A tray of charcoal-crusted meat with salad and garlic sauce"
                   fill
                   sizes="(min-width: 1024px) 560px, 92vw"
                   className="object-cover object-[70%_50%]"
@@ -560,7 +560,7 @@ export default async function HomePage() {
         <div className="container-x grid items-center gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div className="relative" data-reveal="scale">
             <div className="relative aspect-[5/4] overflow-hidden rounded-[30px] shadow-[0_0_0_1.5px_var(--blue),0_0_0_10px_#fff,0_0_0_11.5px_var(--line),0_40px_80px_-40px_rgba(11,50,120,.55)]">
-              <Image src="/images/platters.jpg" alt="Trays of charcoal meat, salad, chips and pita" fill sizes="(min-width: 1024px) 520px, 92vw" className="object-cover" />
+              <Image src="/images/catering-spread.jpg" alt="Trays of charcoal meat, chips, salad and pita laid out for a group" fill sizes="(min-width: 1024px) 520px, 92vw" className="object-cover" />
             </div>
           </div>
           <div data-reveal>
