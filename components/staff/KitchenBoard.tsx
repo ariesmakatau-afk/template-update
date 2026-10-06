@@ -6,8 +6,10 @@ import {
   DEFAULT_SOUND,
   getAlertVolume,
   playAlert,
+  preloadAlert,
   setAlertVolume,
   startUrgentLoop,
+  stopAlert,
   type AlertSoundId,
 } from "@/lib/alertSounds";
 import { formatMoney } from "@/lib/menu";
@@ -164,9 +166,14 @@ export default function KitchenBoard({ isAdmin = false }: { isAdmin?: boolean })
 
   useEffect(() => () => stopUrgent(), [stopUrgent]);
 
+  // Have the chosen alarm downloaded before the first order arrives.
+  useEffect(() => preloadAlert(sound), [sound]);
+
   function armSound() {
     setAudioReady(true);
+    // A short test so staff know it works, not the whole 20-second file.
     playAlert(sound);
+    window.setTimeout(stopAlert, 1500);
   }
   function chooseSound(id: AlertSoundId) {
     setSound(id);
@@ -195,6 +202,7 @@ export default function KitchenBoard({ isAdmin = false }: { isAdmin?: boolean })
   }
   function ack() {
     stopUrgent();
+    stopAlert();
     setUnacked(0);
   }
   function changeVolume(v: number) {
@@ -392,7 +400,10 @@ export default function KitchenBoard({ isAdmin = false }: { isAdmin?: boolean })
       />
       <KitchenSettingsSheet
         open={settingsOpen}
-        onClose={() => setSettingsOpen(false)}
+        onClose={() => {
+          stopAlert();
+          setSettingsOpen(false);
+        }}
         paused={paused}
         onTogglePause={togglePause}
         busyMinutes={busyMinutes}

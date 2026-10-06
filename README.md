@@ -29,7 +29,7 @@ Deploys to Vercel as a standard Next.js project.
 | Staff (password, not indexed) | |
 |---|---|
 | `/staff` | Sign in — 5 tries per device, then a 15-minute lock; at most 3 devices signed in at once |
-| `/kitchen` | **Kitchen tab** — one big button per ticket: **Accept** opens a time picker and only accepts when you confirm, then **Collected**. A **⋯** menu per order holds more time, change amounts, sold out, pause online orders and reject. **⚙ Settings** holds pacing (+0–20 min), the sold-out line, pause, the alarm (fire-alarm tone by default, repeats until silenced, red screen flash) and phone alerts. No Admin tab — staff can't reach admin. |
+| `/kitchen` | **Kitchen tab** — one big button per ticket: **Accept** opens a time picker and only accepts when you confirm, then **Collected**. A **⋯** menu per order holds more time, change amounts, sold out, pause online orders and reject. **⚙ Settings** holds pacing (+0–20 min), the sold-out line, pause, the alarm (nine recordings in `public/sounds`, "Absolute disturbance" by default, loops until silenced, red screen flash) and phone alerts. No Admin tab — staff can't reach admin. |
 | `/admin` | **Admin tab** — today's numbers, online-ordering switch, staff photos, customer wall, catering enquiries, signed-in devices (sign any device out), setup checklist |
 
 There's a small "Staff" link in the footer.
