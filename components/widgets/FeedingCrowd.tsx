@@ -51,9 +51,9 @@ export default function FeedingCrowd() {
     <div className="feeding tile p-7 sm:p-9">
       <div className="grid gap-9 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
         <div>
-          <p className="eyebrow">Feeding a crowd?</p>
+          <p className="eyebrow">Plan it</p>
           <h3 className="mt-4 font-serif text-[clamp(1.9rem,3.2vw,2.6rem)] leading-tight text-blue-navy">
-            Move the number. <span className="fire-text">Watch the trays</span> move.
+            Slide to your headcount. <span className="fire-text">We&rsquo;ll do the Greek-mother maths.</span>
           </h3>
           <p className="lede mt-4 text-[0.98rem]">
             A rough, honest starting point built from the real menu — not a quote. We&rsquo;ll confirm numbers and prices when we

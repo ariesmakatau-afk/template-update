@@ -98,9 +98,9 @@ export default function SpotlightCard() {
           <>It&rsquo;s after the last timed slot — online still has <b>&ldquo;as soon as possible&rdquo;</b> while the fire is up.</>
         ) : (
           <>
-            Not feeling told what to eat?{" "}
+            Rather build your own?{" "}
             <Link href="/menu" className="font-bold text-blue hover:text-ember-deep">
-              Build it your own way <IconArrow className="inline h-3.5 w-3.5" />
+              Start here <IconArrow className="inline h-3.5 w-3.5" />
             </Link>
           </>
         )}

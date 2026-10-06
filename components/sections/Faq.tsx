@@ -42,7 +42,7 @@ export default function Faq({ maxItems, moreHref }: { maxItems?: number; moreHre
           {moreHref && faqs.length > shown.length && (
             <Link href={moreHref} className="tile flex items-center justify-between gap-4 px-6 py-5" data-reveal>
               <span className="font-serif text-[1.35rem] text-blue-navy">
-                {faqs.length - shown.length} more answered at the Visit page
+                {faqs.length - shown.length} more on the Visit page
               </span>
               <IconArrow className="h-5 w-5 shrink-0 text-ember" />
             </Link>

@@ -72,7 +72,7 @@ const signatures = [
 const fireSteps = [
   { n: "01", title: "Carved to order", body: "Shaved off the spit the moment you order, into warm pita and straight into your hands." },
   { n: "02", title: "The garlic sauce", body: "Made in the shop the way it has always been made. No, we won't tell you. Yes, people have asked." },
-  { n: "03", title: "Generous by default", body: "Three meats — lamb, chicken, pork. Have one or mix them. Nobody has ever left here still hungry." },
+  { n: "03", title: "Generous by default", body: "Lamb, chicken or pork. Have one or mix all three. Nobody leaves hungry. It's the Greek way." },
 ];
 
 const usuals: Usual[] = [
@@ -110,7 +110,7 @@ const usuals: Usual[] = [
   {
     name: "The Pork Purist",
     items: ["Regular Pork Yiros, garlic sauce", "Small Chips"],
-    note: "For the third meat's people. Pork all the way down.",
+    note: "For the pork loyalists. Pork all the way down.",
     lines: [
       { cfg: { productId: "yiros", sizeId: "regular", meats: ["pork"], sauces: ["Garlic"], extras: [] }, qty: 1 },
       { cfg: { productId: "chips", sizeId: "small", meats: [], sauces: [], extras: [] }, qty: 1 },
@@ -169,8 +169,8 @@ export default async function HomePage() {
             </span>
           </h1>
           <p className="lede fade-up mt-6 max-w-[34rem] !text-white/75" style={{ "--d": "420ms" } as React.CSSProperties}>
-            Lamb, chicken and pork turning over real charcoal, carved to order and wrapped in warm pita. One corner of Hindley
-            Street, one fire — since {site.established}.
+            Lamb, chicken and pork turned over real charcoal, carved to order and wrapped in warm pita. On Hindley Street
+            since {site.established}.
           </p>
           <div className="fade-up mt-9 flex flex-wrap gap-3" style={{ "--d": "560ms" } as React.CSSProperties}>
             <FireLink href="/menu" className="btn btn-fire" sparks={40}>
@@ -239,13 +239,8 @@ export default async function HomePage() {
               </h2>
               <div data-reveal style={{ "--d": "120ms" } as React.CSSProperties}>
                 <p className="lede mt-8 max-w-xl">
-                  There&rsquo;s been a yiros shop on this corner for about forty years. Yianni took it on around {site.established},
-                  stripped it back, and rebuilt it around one conviction: charcoal or nothing.
-                </p>
-                <p className="lede mt-4 max-w-xl">
-                  In 2023 delicious. 100 named us Best Yiros Shop. In {site.renovated} we rebuilt the shop — new counter, new
-                  floor, wheelchair access, a new spit and a new fryer. Same staff, same fire, same recipe, and the same
-                  satisfaction over every yiros.
+                  Yianni took over this corner in {site.established} and rebuilt it around one rule: charcoal or nothing. In
+                  2023, delicious. 100 named us Best Yiros Shop. In {site.renovated} we rebuilt the shop and lit the same fire.
                 </p>
                 <Link href="/story" className="mt-6 inline-flex items-center gap-2 font-bold text-blue hover:text-ember-deep">
                   Read our story <IconArrow />
@@ -276,7 +271,7 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <dl className="mt-24 grid grid-cols-2 gap-x-6 gap-y-12 border-t border-line pt-12 lg:grid-cols-3">
+          <dl className="mt-24 grid grid-cols-1 gap-x-6 gap-y-12 border-t border-line pt-12 sm:grid-cols-3">
             {houseNumbers.map((n, i) => (
               <div key={n.label} className="relative pl-5" data-reveal style={{ "--d": `${(i % 3) * 100}ms` } as React.CSSProperties}>
                 <span aria-hidden="true" className="absolute left-0 top-2 h-[calc(100%-0.5rem)] w-px bg-line" />
@@ -299,7 +294,7 @@ export default async function HomePage() {
             <div data-reveal>
               <p className="eyebrow">Signatures</p>
               <h2 id="sig-title" className="h-lg mt-5 max-w-2xl text-blue-navy">
-                Love at <span className="blue-text">first bite.</span>
+                The ones people <span className="blue-text">come back for.</span>
               </h2>
             </div>
             <Link href="/menu" className="btn btn-ghost self-start md:self-auto" data-reveal>
@@ -430,8 +425,8 @@ export default async function HomePage() {
               Build your yiros. <span className="fire-text">Right here.</span>
             </h2>
             <p className="lede mt-5">
-              The real menu, the real prices, the same rules the kitchen runs on — meat, salad you can take off, sauces,
-              extras last. When it looks right, one tap puts it on your order and we&rsquo;ll carve it fresh.
+              Real menu, real prices. Pick your meat, take off any salad, choose your sauces, and add it to your order in one
+              tap.
             </p>
             <p className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.72rem] font-extrabold uppercase tracking-[0.18em] text-muted">
               <span className="text-ember-deep">1</span> Build it
@@ -450,11 +445,10 @@ export default async function HomePage() {
             <div data-reveal>
               <p className="eyebrow">The wheel of Hindley</p>
               <h3 className="h-md mt-4 text-blue-navy">
-                Fourteen minutes of scrolling, <span className="blue-text">zero</span> decisions made?
+                Can&rsquo;t decide? <span className="blue-text">Spin for it.</span>
               </h3>
               <p className="lede mt-5 max-w-md">
-                The wheel picks from six orders the shop would eat itself. It has never picked a wrong one — mostly because
-                there aren&rsquo;t any. Give it a spin, then send it through or spin again. We won&rsquo;t tell Yianni.
+                Six house favourites. Spin, add it to your order, or spin again. No plate-smashing required.
               </p>
               <p className="mt-6 flex flex-wrap gap-3">
                 <Link href="/menu" className="btn btn-ghost btn-sm">
@@ -478,7 +472,7 @@ export default async function HomePage() {
               <h2 id="order-title" className="h-lg mt-5 text-blue-navy">
                 Order ahead. <span className="fire-text">Skip</span> the queue.
               </h2>
-              <p className="lede mt-5 max-w-lg">Pickup only, pay at the counter — no card details, no app, no fuss.</p>
+              <p className="lede mt-5 max-w-lg">Pickup only. Pay at the counter, no card or app needed.</p>
             </div>
             <FireLink href="/menu" className="btn btn-fire self-start md:self-auto" data-reveal>
               Start your order <IconArrow />
@@ -504,10 +498,10 @@ export default async function HomePage() {
               <div>
                 <p className="eyebrow">Already sent one through?</p>
                 <h3 className="mt-4 font-serif text-[clamp(1.7rem,2.8vw,2.3rem)] leading-tight text-white">
-                  Paste the code. <span className="fire-text">Watch the spit.</span>
+                  Track your <span className="fire-text">order.</span>
                 </h3>
                 <p className="lede mt-3 text-[0.95rem]">
-                  Received → on the fire → yours, with the kitchen&rsquo;s wait estimate live on your phone.
+                  Paste your order code to see where it&rsquo;s at and the kitchen&rsquo;s wait time.
                 </p>
               </div>
               <OrderLookup />
@@ -566,11 +560,12 @@ export default async function HomePage() {
           <div data-reveal>
             <p className="eyebrow">Catering</p>
             <h2 id="catering-title" className="h-lg mt-5 text-blue-navy">
-              Feeding a crowd? Bring the <span className="fire-text">fire</span>.
+              Catering, by the <span className="fire-text">tray</span>.
             </h2>
             <p className="lede mt-5 max-w-lg">
-              Office lunches, birthdays, footy nights and big family dinners — trays of charcoal meat, salad, pita, chips and
-              far too much garlic sauce. Tell us the date and the headcount; we&rsquo;ll sort the rest.
+              Office lunches, birthdays, footy nights and family dinners. Trays of charcoal meat, salad, pita, chips and
+              plenty of garlic sauce. Give us the date and headcount and we&rsquo;ll handle the rest. Like a Greek wedding,
+              minus the 400 cousins.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link href="/catering" className="btn btn-blue">

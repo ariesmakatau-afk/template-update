@@ -18,7 +18,7 @@ export default function Reviews() {
           <div className="max-w-3xl" data-reveal>
             <p className="eyebrow !text-white/85">Word on the street</p>
             <h2 id="reviews-title" className="h-lg mt-5 text-white">
-              Four decades of Adelaide can&rsquo;t <span className="fire-text">all</span> be wrong.
+              Don&rsquo;t take our word for it. <span className="fire-text">Yia-yia&rsquo;s biased.</span>
             </h2>
           </div>
           <div className="flex flex-wrap gap-4" data-reveal>

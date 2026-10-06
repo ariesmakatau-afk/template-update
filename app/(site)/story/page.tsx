@@ -13,12 +13,12 @@ import { IconArrow, IconStar } from "@/components/Icons";
 export const metadata: Metadata = {
   title: "Our story",
   description:
-    "Forty-odd years of yiros on one corner of Hindley Street, and Yianni's since 2002. Why we still cook over charcoal.",
+    "Nearly fifty years of yiros on one corner of Hindley Street, and Yianni's since 2002. Why we still cook over charcoal.",
 };
 
 const timeline = [
   {
-    when: "Forty-odd years ago",
+    when: "Nearly fifty years ago",
     title: "A yiros shop on this corner",
     body: "Before it was ours, it was already a yiros shop. Different name, same smoke drifting down Hindley Street.",
   },
@@ -35,7 +35,7 @@ const timeline = [
   {
     when: "2025",
     title: "The renovation",
-    body: "New counter, new floor, wheelchair access, a new spit and a new fryer. Same staff, same fire, same recipe.",
+    body: "We took the shop back to the walls and rebuilt it.",
   },
   {
     when: "Tonight",
@@ -45,7 +45,7 @@ const timeline = [
 ];
 
 export default function StoryPage() {
-  const quote = reviews[1];
+  const quote = reviews[0];
   return (
     <>
       <PageHero
@@ -91,9 +91,9 @@ export default function StoryPage() {
             </h2>
             <div className="mt-7 space-y-4" data-reveal>
               <p className="lede">
-                There has been a yiros shop on this corner for roughly forty years. It wasn&rsquo;t always ours. Yianni
-                took it on around {site.established}, stripped it back, and rebuilt it around one conviction: charcoal or
-                nothing.
+                There&rsquo;s been a yiros shop on this corner for nearly fifty years. Yianni&rsquo;s has carried the fire
+                since {site.established}: Yianni took it on, stripped it back, and rebuilt it around one conviction —
+                charcoal or nothing.
               </p>
               <p className="lede">
                 The menu is three meats — lamb, chicken, pork — because a fourth would be showing off. The spit turns over
@@ -118,7 +118,7 @@ export default function StoryPage() {
           <div className="max-w-2xl" data-reveal>
             <p className="eyebrow">Milestones</p>
             <h2 className="h-lg mt-5 text-blue-navy">
-              Four decades, <span className="blue-text">five moments</span>.
+              Five decades, <span className="blue-text">five moments</span>.
             </h2>
           </div>
           <ol className="relative mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
@@ -149,8 +149,8 @@ export default function StoryPage() {
           </div>
           <div className="space-y-4" data-reveal style={{ "--d": "120ms" } as React.CSSProperties}>
             <p className="lede">
-              Charcoal gives the meat two things gas can&rsquo;t fake: a properly browned, crackling edge, and smoke that
-              works into every layer. It takes more tending, more cleaning and more patience.
+              Charcoal needs tending all day: more raking, more cleaning, more patience than any gas burner. What you get
+              back is a crackling edge and smoke through every layer.
             </p>
             <p className="lede">
               The meat turns all day and comes off the spit only when you order it — shaved straight into warm pita. That
@@ -198,12 +198,8 @@ export default function StoryPage() {
             <p className="font-serif text-[clamp(4rem,9vw,7rem)] italic leading-none text-blue">Parea</p>
             <p className="mt-2 text-sm font-extrabold uppercase tracking-[0.24em] text-ember-deep">pa-RE-a · noun</p>
             <p className="lede mt-5">
-              The table, not the food. Your people — the ones who know your order and hold a seat without being asked.
-              English borrowed <em>yiros</em> and stopped there; it never took the word for who you eat it with.
-            </p>
-            <p className="lede mt-4">
-              Ours has been turning up for decades: students at closing time, tradies at noon, families who drive past
-              three other shops to get here. This place is for them.
+              Greek for the people you share a table with. Ours are students at closing time, tradies at noon and families
+              who drive across town for this.
             </p>
           </div>
         </div>

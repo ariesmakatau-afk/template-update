@@ -30,7 +30,7 @@ export default function KitchenStrip() {
           <IconFlame className="h-4 w-4 shrink-0 text-amber" />
           {now.open ? (
             <>
-              <b>Coals are up</b> — carving until {formatClockTime(now.today.close * 60)}
+              <b>Open now</b>, carving until {formatClockTime(now.today.close * 60)}
               <span className="kitchen-strip__count">{formatCountdown(now.secondsTo)}</span>
             </>
           ) : (
@@ -45,7 +45,7 @@ export default function KitchenStrip() {
               <>
                 Last timed pickup <b>{formatClockTime(now.lastSlotMin * 60)}</b>
                 <span className="mx-2 text-white/25">·</span>
-                after that, “as soon as possible” still runs
+                ASAP orders until close
               </>
             ) : (
               <>

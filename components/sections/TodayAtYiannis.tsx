@@ -19,11 +19,11 @@ export default function TodayAtYiannis() {
           <div data-reveal>
             <p className="eyebrow">Today at the shop</p>
             <h2 id="today-title" className="h-lg mt-5 text-blue-navy">
-              The fire, as it stands <span className="blue-text">right now.</span>
+              Here&rsquo;s <span className="blue-text">today.</span>
             </h2>
           </div>
           <p className="lede max-w-sm" data-reveal style={{ "--d": "120ms" } as React.CSSProperties}>
-            Everything below moves with Adelaide time — no stock graphics, no fake “busy” meters.
+            Live hours, today&rsquo;s pick and the week ahead. Adelaide time, not Greek time.
           </p>
         </div>
 
@@ -35,10 +35,10 @@ export default function TodayAtYiannis() {
             </div>
 
             <h3 className="mt-6 font-serif text-[clamp(1.6rem,2.6vw,2.15rem)] leading-tight text-blue-navy">
-              How the week <span className="fire-text !not-italic">burns</span>.
+              The week at a <span className="fire-text !not-italic">glance</span>.
             </h3>
             <p className="mt-2 max-w-md text-[0.92rem] leading-relaxed text-muted">
-              Bar length = hours open, 9am till 11pm. Friday and Saturday are the long nights; Monday we bank the coals at 3:30pm.
+              Late nights Friday and Saturday. Mondays we close at 3:30pm.
             </p>
 
             <div className="mt-7">

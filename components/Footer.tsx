@@ -18,8 +18,7 @@ export default function Footer() {
         <div className="md:col-span-4">
           <Logo tone="white" />
           <p className="mt-5 max-w-xs text-[0.95rem] leading-relaxed text-white/60">
-            Lamb, chicken and pork over real charcoal, carved to order into warm pita. One corner of Hindley Street,
-            one fire, since {site.established}.
+            Charcoal-spit yiros on Hindley Street since {site.established}. Dine in, take away or order ahead. Kali orexi.
           </p>
           <div className="mt-6 flex gap-2.5">
             <a
@@ -119,7 +118,7 @@ export default function Footer() {
         <div className="container-x flex flex-col gap-2 py-5 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Yianni&rsquo;s Hellenic Yiros on Hindley Street. Dine in · Takeaway · Delivery.</p>
           <p>
-            Prices can change with the market — the board in the shop is always right. ·{" "}
+            Prices may change. The board in the shop has the final say, like yia-yia. ·{" "}
             <Link href="/staff" className="hover:text-white">
               Staff
             </Link>

@@ -87,7 +87,7 @@ export default function CateringPage() {
           <div data-reveal>
             <p className="eyebrow">How it works</p>
             <h2 className="h-lg mt-5 text-blue-navy">
-              Three steps. <span className="fire-text">Zero</span> stress.
+              Three steps, then it&rsquo;s <span className="fire-text">sorted</span>.
             </h2>
             <ol className="mt-8 grid gap-5">
               {steps.map((s) => (

@@ -14,8 +14,7 @@ export default function Visit({ headingLevel = 2, compact = false }: { headingLe
             Middle of Hindley. Follow the <span className="fire-text">smoke</span>.
           </H>
           <p className="lede mt-5 max-w-md">
-            No bookings, no fuss. Walk in, point at the spit, and it&rsquo;ll be carved while you watch. Dine in,
-            take away, or have it delivered.
+            Walk in, point at the spit and watch it carved. Dine in, take away, or get it delivered on Uber Eats.
           </p>
           <div className="mt-6 flex flex-wrap gap-2.5">
             <OpenStatus />
@@ -43,11 +42,11 @@ export default function Visit({ headingLevel = 2, compact = false }: { headingLe
 
           {compact ? (
             <p className="mt-10 text-sm text-muted">
-              This week&rsquo;s hours move with the shop — you&rsquo;ll find them ticking on the{" "}
+              Full trading hours are on the{" "}
               <a href="/visit" className="font-bold text-blue underline underline-offset-4">
-                full Visit page
+                Visit page
               </a>
-              , and the live answer at the top of this one.
+              .
             </p>
           ) : (
             <div className="tile mt-10 overflow-hidden !rounded-[22px] p-0 hover:!translate-y-0">

@@ -25,7 +25,7 @@ export const site = {
   instagram: "https://www.instagram.com/yiannisyiroshindley",
   uberEats:
     "https://www.ubereats.com/au/store/yiannis-on-hindley/_NoeJbsUQAyXKfiOujUcfw",
-  // A yiros shop has stood on this corner for about forty years. Yianni took
+  // A yiros shop has stood on this corner for nearly fifty years. Yianni took
   // it over and rebranded it around 2002 (the shopfront reads EST-2002).
   established: 2002,
   renovated: 2025,
@@ -35,7 +35,7 @@ export const site = {
 export const renovation = {
   year: 2025,
   new: ["Counter", "Floor", "Wheelchair access", "Spit", "Fryer"],
-  same: ["Staff", "Fire", "Recipe", "Satisfaction over every yiros"],
+  same: ["Staff", "Fire", "Recipe", "Care in every yiros"],
 };
 
 /** Client-confirmed: average review rating. */
@@ -118,12 +118,9 @@ export const reviews = [
  * own (conservative) estimate; the rest are true by definition.
  */
 export const houseNumbers = [
-  { value: 1000000, suffix: "+", label: "Yiros served", aside: "Give or take. Nobody was counting — well, the till was." },
-  { value: 1000000, suffix: "+", label: "Pitas torn apart", aside: "Warmed, loaded, wrapped. Very few survive the walk home." },
-  { value: 3, suffix: "", label: "Meats, total", aside: "Lamb, chicken, pork. There is no fourth. People ask." },
-  { value: 0, suffix: "", label: "Recipe changes", aside: "It was right the first time." },
-  { value: 40, suffix: "-ish", label: "Years of yiros on this corner", aside: "Nobody kept the paperwork. The fire kept going." },
-  { value: 0, suffix: "%", label: "Garlic restraint", aside: "You will know. Tomorrow, so will your colleagues." },
+  { value: 3, suffix: "", label: "Meats, total", aside: "Lamb, chicken, pork. Ask for a fourth and yia-yia gets involved." },
+  { value: 0, suffix: "", label: "Recipe changes", aside: "Right the first time. Don't tell the cousins." },
+  { value: 0, suffix: "%", label: "Garlic restraint", aside: "Your colleagues will know. Tomorrow." },
 ];
 
 export const faqs = [

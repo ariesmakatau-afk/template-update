@@ -57,7 +57,7 @@ export default function OrderLookup() {
         </button>
       </div>
       <p className={`mt-2 min-h-[1.2em] text-[0.8rem] ${error ? "text-amber" : "text-white/45"}`} aria-live="polite">
-        {error ?? "The code lives on the page you land on after checking out — we email nothing, that's the point."}
+        {error ?? "Your code is on the confirmation page after checkout."}
       </p>
     </form>
   );

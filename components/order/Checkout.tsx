@@ -180,7 +180,7 @@ export default function Checkout() {
                 </label>
                 <label className="field">
                   <span>
-                    Email <em>optional — only for the odd offer</em>
+                    Email <em>optional. Only for promos, never spam. We swear on yia-yia.</em>
                   </span>
                   <input type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} maxLength={120} />
                 </label>

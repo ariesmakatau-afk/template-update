@@ -125,7 +125,7 @@ export default function YirosBuilder() {
         </div>
         <p className="builder__readout">
           <IconFlame className="h-3.5 w-3.5 text-amber" />
-          {noMeat ? "Pick at least one meat — the fire&rsquo;s waiting." : d.title}
+          {noMeat ? "Pick at least one meat — the fire's waiting." : d.title}
           {d.detail && <span className="builder__detail">{d.detail}</span>}
         </p>
       </div>
@@ -193,7 +193,7 @@ export default function YirosBuilder() {
             <div>
               <p className="text-[0.7rem] font-extrabold uppercase tracking-[0.22em] text-ember-deep">4 · Sauces</p>
               <p className="mt-1 text-sm text-muted">
-                {FREE} free, then {formatMoney(0.5)} a tub. Garlic is already in — that&rsquo;s how we like it.
+                {FREE} free, then 50c each. Garlic&rsquo;s already in. We&rsquo;re Greek, it&rsquo;s the law.
               </p>
             </div>
             <span className={`text-[0.78rem] font-bold ${overSauces ? "text-ember-deep" : "text-muted"}`}>
@@ -214,7 +214,7 @@ export default function YirosBuilder() {
           <div>
             <p className="text-[0.7rem] font-extrabold uppercase tracking-[0.22em] text-ember-deep">5 · Anything extra?</p>
             <p className="mt-1 text-sm text-muted">
-              {extrasCost === 0 ? "Most people skip this — nobody&rsquo;s counting." : `That&rsquo;s +${formatMoney(extrasCost)}. The onion one is the good one.`}
+              {extrasCost === 0 ? "Optional. Most people skip it." : `That’s +${formatMoney(extrasCost)}. The onion one is the good one.`}
             </p>
           </div>
           <div className="flex flex-wrap gap-2" role="group" aria-label="Extras">

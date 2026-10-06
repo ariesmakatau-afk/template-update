@@ -35,7 +35,7 @@ function stepsFor(product: Product): Step[] {
   if (product.meatChoice) s.push({ id: "meat", label: "Which meat?", hint: "One, two or all three — lamb adds $2, once." });
   if (product.variant) s.push({ id: "variant", label: `${product.variant.label}?`, hint: "" });
   if (product.salad?.length)
-    s.push({ id: "salad", label: "Everything's in.", hint: "Tap off anything you don't want. We'll never leave it out by mistake." });
+    s.push({ id: "salad", label: "Everything's in.", hint: "Tap off anything you don't want." });
   if (product.freeSauces !== undefined)
     s.push({ id: "sauces", label: `Pick your sauces.`, hint: `${product.freeSauces} free, then 50c each. Garlic's on already.` });
   if (product.allowedExtras.length > 0)

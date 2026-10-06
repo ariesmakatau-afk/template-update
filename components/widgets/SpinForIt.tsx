@@ -110,12 +110,6 @@ export default function SpinForIt() {
   return (
     <div className="wheel-card" data-tone="dark">
       <p className="eyebrow !text-amber !tracking-[0.18em]">Indecision, solved</p>
-      <h3 className="mt-4 font-serif text-[clamp(1.7rem,2.8vw,2.3rem)] leading-tight text-white">
-        Can&rsquo;t choose? <span className="fire-text">The wheel</span> can.
-      </h3>
-      <p className="mt-3 text-[0.92rem] leading-relaxed text-white/65">
-        Six orders we&rsquo;d make with our eyes closed. Give it a spin — the house never pays out a bad choice.
-      </p>
 
       <div className="wheel">
         <div key={landed} className={`wheel__needle${landed && !spinning ? " is-tick" : ""}`} aria-hidden="true" />
@@ -183,9 +177,6 @@ export default function SpinForIt() {
         )}
       </div>
 
-      <p className="mt-4 text-center text-[0.72rem] font-bold uppercase tracking-[0.14em] text-white/35">
-        A lamb yiros with garlic is always a fair answer
-      </p>
     </div>
   );
 }

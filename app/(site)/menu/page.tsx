@@ -140,7 +140,7 @@ export default async function MenuPage() {
             </span>
           </>
         }
-        lede="Tap Add on anything, pick your meat and sauces, and send it through. It'll be carved and wrapped for your pickup time — you pay at the counter."
+        lede="Tap Add, pick your meat and sauces, and send it through. It'll be ready at your pickup time. Pay at the counter."
       >
         <div className="fade-up mt-6 flex flex-wrap items-center gap-3" style={{ "--d": "380ms" } as React.CSSProperties}>
           <OpenStatus />
@@ -178,8 +178,7 @@ export default async function MenuPage() {
               <p className="text-sm font-extrabold tracking-widest text-ember">{String(food.length + 1).padStart(2, "0")}</p>
               <h2 className="h-md mt-1 text-blue-navy">Extras &amp; sauces</h2>
               <p className="mt-1.5 max-w-md text-muted">
-                Added when you build an item — the options only show where they work (no chips on an AB Pack; it&rsquo;s already
-                sitting on them).
+                Add these while you build an item. You&rsquo;ll only see the ones that fit.
               </p>
             </div>
             <ul className="mt-6 grid gap-x-10 sm:grid-cols-2">

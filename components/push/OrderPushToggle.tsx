@@ -33,7 +33,7 @@ export default function OrderPushToggle({ orderRef }: { orderRef: string }) {
           ? "📲 Add the site to your Home Screen, then tap here again"
           : mode === "denied"
             ? "🔕 Alerts are blocked in this browser"
-            : "📲 Ping me when my order moves";
+            : "📲 Send me updates on this order";
 
   return (
     <button

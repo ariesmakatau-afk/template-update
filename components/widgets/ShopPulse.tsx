@@ -32,7 +32,7 @@ export default function ShopPulse({ className = "" }: { className?: string }) {
         ) : now.open ? (
           <>
             <span className="pulse-card__dot is-lit" aria-hidden="true" />
-            <b>The coals are up.</b> Last orders off the fire at {formatClockTime(now.today.close * 60)}.
+            <b>The coals are up.</b> Open until {formatClockTime(now.today.close * 60)}.
           </>
         ) : (
           <>
@@ -55,7 +55,7 @@ export default function ShopPulse({ className = "" }: { className?: string }) {
         </div>
         <div className="pulse-card__stat">
           <span className="pulse-card__num">{now === null ? "—" : now.open ? "Pay at the counter" : "Order ahead"}</span>
-          <span className="pulse-card__lab">{now === null ? "" : now.open ? "no card, no app" : "wrapped for when doors go up"}</span>
+          <span className="pulse-card__lab">{now === null ? "" : now.open ? "nothing to pay online" : "wrapped for when doors go up"}</span>
         </div>
       </div>
     </div>

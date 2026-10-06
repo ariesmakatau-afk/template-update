@@ -13,7 +13,7 @@ export default function FinalCta({
       The coals are <span className="fire-text">already</span> going.
     </>
   ),
-  body = "270 Hindley Street. No bookings, no fuss — walk in and follow your nose.",
+  body = "270 Hindley Street. Walk in, or order ahead and skip the queue. Ela!",
 }: {
   eyebrow?: string;
   title?: React.ReactNode;
