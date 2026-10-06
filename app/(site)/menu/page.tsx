@@ -15,7 +15,7 @@ import {
 } from "@/lib/menu";
 import { groupPhotos, productPhotos } from "@/lib/menu-media";
 import { site } from "@/lib/site";
-import { isConfigured, readOrderingSettings } from "@/lib/content-store";
+import { isConfigured, readDeal, readOrderingSettings } from "@/lib/content-store";
 import PageHero from "@/components/sections/PageHero";
 import MenuNav from "@/components/MenuNav";
 import OpenStatus from "@/components/OpenStatus";
@@ -128,6 +128,7 @@ function Group({ g, index }: { g: ProductGroup; index: number }) {
 
 export default async function MenuPage() {
   const settings = isConfigured() ? await readOrderingSettings({ revalidate: 15 }) : { paused: false, message: "" };
+  const deal = await readDeal({ revalidate: 15 });
 
   return (
     <>
@@ -171,6 +172,13 @@ export default async function MenuPage() {
 
       <div className="container-x grid gap-10 pb-24 pt-10 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-14">
         <div>
+          {deal.on && deal.banner && (
+            <section id="deal" className="surface-blue scroll-mt-40 rounded-[26px] p-7" data-tone="dark">
+              <p className="eyebrow !text-white/85">On now</p>
+              <h2 className="mt-2 font-serif text-[2rem] leading-tight text-white">{deal.banner}</h2>
+              {deal.details && <p className="mt-3 max-w-xl whitespace-pre-line text-white/80">{deal.details}</p>}
+            </section>
+          )}
           <div className="space-y-5 pt-8">
             <MenuFinder />
             <ShopNotice />

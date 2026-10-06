@@ -105,7 +105,12 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
     - an ⋯ menu for order options
     - a Settings sheet
     - 9 loud alarm MP3s in `public/sounds`, with "disturbance" as the default
-  - `/admin`: photo uploads (up to 4 per wall, no placeholders) and enquiries.
+  - `/admin`: photo uploads (up to 4 per wall, no placeholders), the Deal, and enquiries.
+- Photo uploads now refresh the home page and `/parea` straight away. Before, the cached pages could take a few visits to show new photos.
+- **Deal:** set in `/admin` → Deal (on/off switch, one banner line, optional full details).
+  - The banner shows at the top of the home page.
+  - The full deal shows at the top of `/menu` (`/menu#deal`), and the banner links there.
+- The home page Parea section has a line pointing people to the photos on `/parea`.
 - Customers see their order tracking code at checkout and on the tracker page.
 - Push notifications on iPhone only work if the kitchen board is added to the **Home Screen** from Safari. A plain Safari tab can't receive them.
 - Secrets live only in Vercel env vars. **Never** put keys or passwords in code or chat. (Keys were once pasted into a chat; they should have been rotated.)
@@ -137,3 +142,4 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - Lamb & Garlic wrap at $22
 - Copy rewrite with humour
 - This CLAUDE.md (rules + superpowers + memory) added
+- Photos show straight after upload, Parea teaser on home, Deal banner + /menu deal

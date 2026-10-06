@@ -6,6 +6,8 @@ import { formatMoney } from "@/lib/menu";
 import StaffShell from "./StaffShell";
 import SignedInDevices from "./SignedInDevices";
 import PhotoWall from "./PhotoWall";
+import DealEditor from "./DealEditor";
+import type { Deal } from "@/lib/content-store";
 
 type Photo = { id: string; url: string; caption: string; name?: string };
 
@@ -36,6 +38,7 @@ type Setup = { database: boolean; staffLogin: boolean; adminLogin: boolean; phon
 const SECTIONS = [
   { id: "today", label: "Today" },
   { id: "ordering", label: "Online ordering" },
+  { id: "deal", label: "Deal" },
   { id: "staff", label: "Staff photos" },
   { id: "customers", label: "Customer wall" },
   { id: "catering", label: "Catering" },
@@ -47,6 +50,7 @@ export default function AdminPanel({
   team,
   customers,
   ordering,
+  deal,
   enquiries: initialEnquiries,
   stats,
   setup,
@@ -55,6 +59,7 @@ export default function AdminPanel({
   team: Photo[];
   customers: Photo[];
   ordering: { paused: boolean; message: string };
+  deal: Deal;
   enquiries: Enquiry[];
   stats: TodayStats | null;
   setup: Setup;
@@ -170,6 +175,15 @@ export default function AdminPanel({
               Save message
             </button>
             {saved && <p className="mt-2 text-sm font-semibold text-blue-deep">{saved}</p>}
+          </section>
+
+          {/* Deal */}
+          <section id="deal" className="tile scroll-mt-24 p-6 hover:!translate-y-0">
+            <h2 className="font-serif text-3xl text-blue-navy">Deal</h2>
+            <p className="mt-1 text-sm text-muted">
+              The banner line shows at the top of the home page. Tapping it takes people to the full deal at the top of the Menu page.
+            </p>
+            <DealEditor initial={deal} disabled={!setup.database} />
           </section>
 
           {/* Staff */}

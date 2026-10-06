@@ -3,7 +3,7 @@ import { requireStaffPage } from "@/lib/requireStaff";
 import { isConfigured, select } from "@/lib/supabase";
 import { MAX_SESSIONS } from "@/lib/session";
 import { pushReady } from "@/lib/push";
-import { readOrderingSettings, readPhotos } from "@/lib/content-store";
+import { readDeal, readOrderingSettings, readPhotos } from "@/lib/content-store";
 import AdminPanel, { type Enquiry, type TodayStats } from "@/components/staff/AdminPanel";
 
 export const metadata: Metadata = { title: "Admin" };
@@ -15,10 +15,11 @@ export default async function AdminPage() {
   await requireStaffPage("/admin", "admin");
   const db = isConfigured();
 
-  const [team, customers, ordering] = await Promise.all([
+  const [team, customers, ordering, deal] = await Promise.all([
     readPhotos("team"),
     readPhotos("customers"),
     readOrderingSettings(),
+    readDeal(),
   ]);
 
   let enquiries: Enquiry[] = [];
@@ -59,5 +60,5 @@ export default async function AdminPage() {
     lockScreenPush: pushTable,
   };
 
-  return <AdminPanel team={team} customers={customers} ordering={ordering} enquiries={enquiries} stats={stats} setup={setup} maxSessions={MAX_SESSIONS} />;
+  return <AdminPanel team={team} customers={customers} ordering={ordering} deal={deal} enquiries={enquiries} stats={stats} setup={setup} maxSessions={MAX_SESSIONS} />;
 }

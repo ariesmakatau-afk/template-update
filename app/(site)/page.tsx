@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { award, houseNumbers, rating, site } from "@/lib/site";
 import { allProducts, priceRange } from "@/lib/menu";
-import { readPhotos } from "@/lib/content-store";
+import { readDeal, readPhotos } from "@/lib/content-store";
 import CoalBed from "@/components/fire/CoalBed";
 import EmberCanvas from "@/components/fire/EmberCanvas";
 import CountUp from "@/components/CountUp";
@@ -129,7 +129,11 @@ function Stars({ className = "h-3.5 w-3.5" }: { className?: string }) {
 }
 
 export default async function HomePage() {
-  const [team, customers] = await Promise.all([readPhotos("team", { revalidate: 30 }), readPhotos("customers", { revalidate: 30 })]);
+  const [team, customers, deal] = await Promise.all([
+    readPhotos("team", { revalidate: 30 }),
+    readPhotos("customers", { revalidate: 30 }),
+    readDeal({ revalidate: 30 }),
+  ]);
 
   return (
     <>
@@ -150,6 +154,16 @@ export default async function HomePage() {
         <EmberCanvas tone="dark" rate={38} band={0.14} motes={16} stokeOnPointer stokeOnScroll />
 
         <div className="container-x relative z-10 flex min-h-[100svh] flex-col justify-end pb-[clamp(9rem,17vw,13rem)] pt-40">
+          {deal.on && deal.banner && (
+            <Link
+              href="/menu#deal"
+              className="fade-up mb-5 flex w-fit max-w-full items-center gap-3 rounded-full bg-white py-1.5 pl-1.5 pr-4 text-sm font-bold text-blue-navy shadow-lg transition hover:bg-mist"
+            >
+              <span className="shrink-0 rounded-full bg-blue px-2.5 py-1 text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-white">Deal</span>
+              <span className="min-w-0">{deal.banner}</span>
+              <IconArrow />
+            </Link>
+          )}
           <div className="fade-up flex flex-wrap items-center gap-2.5">
             <OpenStatus />
             <BoundaryCountdown />
@@ -517,6 +531,13 @@ export default async function HomePage() {
               <h2 id="parea-title" className="h-lg mt-5 max-w-3xl text-blue-navy">
                 The crew on the spit, and the <span className="blue-text">regulars</span> who keep coming back.
               </h2>
+              <p className="mt-4 max-w-xl text-muted">
+                More photos of the crew and our regulars are up on the{" "}
+                <Link href="/parea" className="font-bold text-blue hover:text-blue-deep">
+                  Parea page
+                </Link>
+                . Have a look — you might already be on the wall.
+              </p>
             </div>
             <Link href="/parea" className="btn btn-ghost self-start lg:self-auto" data-reveal>
               Meet the parea <IconArrow />

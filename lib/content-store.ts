@@ -105,3 +105,27 @@ export async function writeShopFlags(f: ShopFlags): Promise<void> {
 }
 
 export { isConfigured };
+
+/**
+ * The current deal, set from /admin. `banner` is the one line shown at the
+ * top of the home page; `details` is the full deal, shown on /menu.
+ */
+export type Deal = { on: boolean; banner: string; details: string };
+
+export async function readDeal(opts: ReadOpts = {}): Promise<Deal> {
+  const raw = await getContent("deal", opts);
+  try {
+    const parsed = raw ? JSON.parse(raw) : {};
+    return {
+      on: Boolean(parsed.on),
+      banner: typeof parsed.banner === "string" ? parsed.banner : "",
+      details: typeof parsed.details === "string" ? parsed.details : "",
+    };
+  } catch {
+    return { on: false, banner: "", details: "" };
+  }
+}
+
+export async function writeDeal(d: Deal): Promise<void> {
+  await setContent("deal", JSON.stringify(d));
+}

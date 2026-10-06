@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { revalidatePath } from "next/cache";
 import { isAdmin } from "@/lib/requireStaff";
 import { isConfigured, uploadToStorage } from "@/lib/supabase";
 import { PHOTO_LIMITS, readPhotos, writePhotos, type PhotoKind, type WallPhoto } from "@/lib/content-store";
@@ -11,6 +12,13 @@ export const dynamic = "force-dynamic";
 
 const MAX_BYTES = 8 * 1024 * 1024;
 const ALLOWED = new Set(["image/jpeg", "image/png", "image/webp"]);
+
+// The home page and /parea are cached; refresh them now so a change shows on
+// the next visit instead of a visit or two later.
+function refreshPublicPages() {
+  revalidatePath("/");
+  revalidatePath("/parea");
+}
 
 function kindOf(v: unknown): PhotoKind | null {
   return v === "team" || v === "customers" ? v : null;
@@ -56,6 +64,7 @@ export async function POST(request: NextRequest) {
     const url = await uploadToStorage("media", `${folder}/${id}.${ext}`, await file.arrayBuffer(), file.type);
     const next: WallPhoto[] = [{ id, url, caption: line, ...(name ? { name } : {}) }, ...photos];
     await writePhotos(kind, next);
+    refreshPublicPages();
     return NextResponse.json({ photos: next });
   } catch (err) {
     console.error("[admin/photos] upload failed:", err);
@@ -73,6 +82,7 @@ export async function DELETE(request: NextRequest) {
   try {
     const next = (await readPhotos(kind)).filter((p) => p.id !== id);
     await writePhotos(kind, next);
+    refreshPublicPages();
     return NextResponse.json({ photos: next });
   } catch (err) {
     console.error("[admin/photos] delete failed:", err);
