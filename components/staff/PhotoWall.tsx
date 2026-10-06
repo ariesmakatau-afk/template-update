@@ -4,6 +4,27 @@ import { useRef, useState } from "react";
 
 type Photo = { id: string; url: string; caption: string; name?: string };
 
+/**
+ * Shrink a photo in the browser and re-save it as JPEG before uploading:
+ * phone photos are often HEIC or 5MB+, and the server only takes JPG/PNG/WEBP
+ * under Vercel's ~4.5MB request limit. 2000px on the long side is plenty.
+ */
+async function prepare(file: File): Promise<File> {
+  try {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, 2000 / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(bitmap.width * scale);
+    canvas.height = Math.round(bitmap.height * scale);
+    canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    const blob = await new Promise<Blob | null>((r) => canvas.toBlob(r, "image/jpeg", 0.85));
+    if (!blob) return file;
+    return new File([blob], file.name.replace(/\.\w+$/, "") + ".jpg", { type: "image/jpeg" });
+  } catch {
+    return file; // the browser couldn't read it; let the server say why
+  }
+}
+
 /** Upload / remove photos for one wall: staff ("team") or customers. */
 export default function PhotoWall({ kind, initial, limit }: { kind: "team" | "customers"; initial: Photo[]; limit: number }) {
   const [photos, setPhotos] = useState<Photo[]>(initial);
@@ -15,8 +36,12 @@ export default function PhotoWall({ kind, initial, limit }: { kind: "team" | "cu
   const team = kind === "team";
 
   async function uploadFiles(files: FileList | File[]) {
-    const list = Array.from(files).filter((f) => f.type.startsWith("image/"));
-    if (list.length === 0) return;
+    // Some phones hand over photos with no type at all, so don't filter those out.
+    const list = Array.from(files).filter((f) => !f.type || f.type.startsWith("image/"));
+    if (list.length === 0) {
+      setMsg({ ok: false, text: "That doesn't look like a photo. Try a JPG or PNG." });
+      return;
+    }
     const room = Math.max(0, limit - photos.length);
     if (room === 0) {
       setMsg({ ok: false, text: `That wall holds ${limit} photos — remove one first.` });
@@ -30,12 +55,12 @@ export default function PhotoWall({ kind, initial, limit }: { kind: "team" | "cu
       for (let i = 0; i < batch.length; i++) {
         const form = new FormData();
         form.append("kind", kind);
-        form.append("photo", batch[i]);
+        form.append("photo", await prepare(batch[i]));
         form.append("caption", caption.trim());
         if (name.trim()) form.append("name", name.trim());
         const res = await fetch("/api/admin/photos", { method: "POST", body: form });
         const body = await res.json().catch(() => ({}));
-        if (!res.ok) throw new Error(body.error ?? "Upload failed.");
+        if (!res.ok) throw new Error(body.error ?? (res.status === 413 ? "That photo is too big to send." : `Upload failed (${res.status}).`));
         next = body.photos;
         setPhotos(next);
       }
@@ -91,7 +116,7 @@ export default function PhotoWall({ kind, initial, limit }: { kind: "team" | "cu
       <input
         ref={input}
         type="file"
-        accept="image/jpeg,image/png,image/webp"
+        accept="image/*"
         multiple
         className="hidden"
         onChange={(e) => {

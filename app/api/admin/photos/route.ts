@@ -59,7 +59,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ photos: next });
   } catch (err) {
     console.error("[admin/photos] upload failed:", err);
-    return NextResponse.json({ error: "Upload failed. Try again." }, { status: 502 });
+    const detail = err instanceof Error ? err.message.slice(0, 200) : "";
+    return NextResponse.json({ error: `Upload failed. ${detail}`.trim() }, { status: 502 });
   }
 }
 

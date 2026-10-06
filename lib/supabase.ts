@@ -162,9 +162,22 @@ export async function getContent(key: string, opts: { revalidate?: number } = {}
   }
 }
 
+/** Create a public bucket. "Already exists" counts as success. */
+async function createPublicBucket(url: string, key: string, bucket: string): Promise<void> {
+  const res = await fetch(`${url}/storage/v1/bucket`, {
+    method: "POST",
+    headers: headers(key),
+    body: JSON.stringify({ id: bucket, name: bucket, public: true }),
+  });
+  if (!res.ok && !/already exists|Duplicate/i.test(await res.text())) {
+    throw new Error(`Could not create the "${bucket}" storage bucket (${res.status}).`);
+  }
+}
+
 /**
  * Upload to Supabase Storage, overwriting whatever is at `path`.
- * Returns the public URL. The bucket must be created and set public.
+ * Returns the public URL. Creates the (public) bucket the first time if the
+ * project doesn't have it yet.
  */
 export async function uploadToStorage(
   bucket: string,
@@ -173,17 +186,25 @@ export async function uploadToStorage(
   contentType: string
 ): Promise<string> {
   const { url, key } = requireConfig();
-  const res = await fetch(`${url}/storage/v1/object/${bucket}/${path}`, {
-    method: "POST",
-    headers: {
-      apikey: key,
-      Authorization: `Bearer ${key}`,
-      "Content-Type": contentType,
-      // Overwrite rather than error — only ever one current photo.
-      "x-upsert": "true",
-    },
-    body,
-  });
+  const put = () =>
+    fetch(`${url}/storage/v1/object/${bucket}/${path}`, {
+      method: "POST",
+      headers: {
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+        "Content-Type": contentType,
+        // Overwrite rather than error — only ever one current photo.
+        "x-upsert": "true",
+      },
+      body,
+    });
+  let res = await put();
+  if (!res.ok) {
+    const text = await res.text();
+    if (!/bucket not found/i.test(text)) throw new Error(`Supabase upload failed (${res.status}): ${text}`);
+    await createPublicBucket(url, key, bucket);
+    res = await put();
+  }
   if (!res.ok) {
     throw new Error(`Supabase upload failed (${res.status}): ${await res.text()}`);
   }
