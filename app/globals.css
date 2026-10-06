@@ -29,11 +29,12 @@
   --ink: #0c1628;
   --muted: #55607a;
 
-  --char-950: #060709;
-  --char-900: #0b0c10;
-  --char-800: #131519;
-  --char-700: #1c1f26;
-  --char-600: #2a2e38;
+  /* Night over the Aegean: blacks with blue in them, never neutral grey-black. */
+  --char-950: #040a17;
+  --char-900: #071226;
+  --char-800: #0d1b37;
+  --char-700: #15284b;
+  --char-600: #22385f;
 
   --ember: #ff5b1f;
   --ember-hot: #ff7a2b;
@@ -63,7 +64,7 @@
     font-feature-settings: "ss01", "cv11";
     text-rendering: optimizeLegibility;
     min-width: 0;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
   }
   h1,
   h2,
@@ -219,8 +220,8 @@
   .btn-fire {
     color: #1d0700;
     background: var(--fire-btn);
-    box-shadow: inset 0 1px 0 rgba(255, 244, 214, 0.75), inset 0 -2px 6px rgba(120, 20, 0, 0.35),
-      0 6px 0 #9a2208, 0 10px 30px -10px rgba(255, 80, 20, 0.75), 0 0 0 1px rgba(200, 50, 10, 0.35);
+    box-shadow: inset 0 1px 0 rgba(255, 244, 214, 0.75), inset 0 -2px 6px rgba(120, 20, 0, 0.3),
+      0 4px 0 rgba(7, 24, 58, 0.28), 0 10px 22px -12px rgba(7, 24, 58, 0.45);
   }
   .btn-fire::before {
     content: "";
@@ -235,13 +236,12 @@
   }
   .btn-fire:hover {
     transform: translateY(-2px);
-    box-shadow: inset 0 1px 0 rgba(255, 244, 214, 0.85), inset 0 -2px 6px rgba(120, 20, 0, 0.3),
-      0 7px 0 #9a2208, 0 18px 44px -10px rgba(255, 80, 20, 0.85), 0 0 0 1px rgba(255, 120, 40, 0.6),
-      0 0 34px 2px rgba(255, 120, 30, 0.35);
+    box-shadow: inset 0 1px 0 rgba(255, 244, 214, 0.85), inset 0 -2px 6px rgba(120, 20, 0, 0.25),
+      0 5px 0 rgba(7, 24, 58, 0.28), 0 16px 30px -14px rgba(7, 24, 58, 0.5);
   }
   .btn-fire:active:not(:disabled) {
     transform: translateY(4px);
-    box-shadow: inset 0 1px 0 rgba(255, 244, 214, 0.5), 0 1px 0 #9a2208, 0 4px 10px -6px rgba(255, 80, 20, 0.6);
+    box-shadow: inset 0 1px 0 rgba(255, 244, 214, 0.5), 0 1px 0 rgba(7, 24, 58, 0.28), 0 3px 8px -6px rgba(7, 24, 58, 0.45);
   }
 
   .btn-blue {
@@ -354,8 +354,8 @@
   .surface-dark {
     position: relative;
     color: #fff;
-    background: radial-gradient(90% 60% at 50% 115%, rgba(255, 90, 20, 0.32), transparent 62%),
-      radial-gradient(60% 50% at 0% 0%, rgba(20, 80, 180, 0.22), transparent 70%), var(--char-900);
+    background: radial-gradient(90% 60% at 50% 115%, rgba(43, 107, 224, 0.34), transparent 62%),
+      radial-gradient(60% 50% at 0% 0%, rgba(156, 192, 245, 0.16), transparent 70%), var(--char-900);
     isolation: isolate;
   }
   .grain::after {
@@ -469,13 +469,13 @@
   .arch__shade {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(6, 7, 9, 0.35) 0%, rgba(6, 7, 9, 0) 30%, rgba(6, 7, 9, 0.1) 55%, rgba(6, 7, 9, 0.9) 100%);
+    background: linear-gradient(180deg, rgba(4, 10, 23, 0.3) 0%, rgba(4, 10, 23, 0) 30%, rgba(4, 10, 23, 0.08) 55%, rgba(4, 10, 23, 0.75) 100%);
   }
   /* Firelight: an orange wash that flickers irregularly over the photo. */
   .firelight {
     position: absolute;
     inset: 0;
-    background: radial-gradient(80% 55% at 50% 100%, rgba(255, 120, 30, 0.55), transparent 70%);
+    background: radial-gradient(80% 55% at 50% 100%, rgba(255, 140, 60, 0.18), transparent 70%);
     mix-blend-mode: overlay;
     animation: firelight 3.7s steps(1, end) infinite, firelight-soft 5.3s ease-in-out infinite;
   }
@@ -1474,7 +1474,7 @@
   gap: 1.6rem;
   padding: clamp(1.75rem, 4vw, 3rem);
   min-height: 420px;
-  background: radial-gradient(120% 100% at 50% 130%, rgba(255, 90, 20, 0.38), transparent 62%), var(--char-900);
+  background: radial-gradient(120% 100% at 50% 130%, rgba(43, 107, 224, 0.4), transparent 62%), var(--char-900);
 }
 .builder__steam {
   position: absolute;
@@ -1663,7 +1663,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: clamp(1.4rem, 3vw, 2rem);
   background: radial-gradient(130% 90% at 50% -10%, rgba(43, 107, 224, 0.28), transparent 55%),
-    radial-gradient(80% 60% at 50% 120%, rgba(255, 90, 20, 0.22), transparent 60%), var(--char-900);
+    radial-gradient(80% 60% at 50% 120%, rgba(156, 192, 245, 0.14), transparent 60%), var(--char-900);
   box-shadow: 0 44px 90px -44px rgba(7, 20, 45, 0.85);
 }
 .wheel {

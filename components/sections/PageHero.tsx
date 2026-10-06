@@ -1,5 +1,4 @@
 import Link from "next/link";
-import CoalBed from "../fire/CoalBed";
 import EmberCanvas from "../fire/EmberCanvas";
 
 /** Dark, fire-lit page header for inner pages (header turns white over it). */
@@ -20,12 +19,12 @@ export default function PageHero({
 }) {
   return (
     <section className="surface-dark grain relative overflow-hidden" data-tone="dark" data-header-dark>
-      {image && <div className="absolute inset-0 opacity-45">{image}</div>}
+      {/* Phones: the photo sits in the lower half at its own shape, so a wide shot isn't cropped to a sliver. */}
+      {image && <div className="absolute inset-x-0 bottom-0 h-[58%] opacity-60 sm:inset-0 sm:h-auto sm:opacity-45">{image}</div>}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,12,16,.96)_0%,rgba(11,12,16,.72)_22%,rgba(11,12,16,.45)_55%,rgba(11,12,16,.92)_100%)]"
+        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,18,38,.97)_0%,rgba(7,18,38,.85)_35%,rgba(7,18,38,.4)_65%,rgba(7,18,38,.85)_100%)] sm:bg-[linear-gradient(180deg,rgba(7,18,38,.96)_0%,rgba(7,18,38,.72)_22%,rgba(7,18,38,.45)_55%,rgba(7,18,38,.92)_100%)]"
       />
-      <CoalBed />
       <EmberCanvas tone="dark" rate={32} band={0.12} motes={10} stokeOnPointer />
       <div
         className={`container-x relative z-10 ${

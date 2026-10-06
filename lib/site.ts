@@ -55,10 +55,12 @@ export const award = {
  * poster shows and nothing looks broken.
  * Best results: 1920×1080, 8–15 seconds, seamless loop, no audio, under 8MB.
  */
-export const heroVideo: { src: string | null; webm: string | null; poster: string } = {
+export const heroVideo: { src: string | null; webm: string | null; poster: string; posterMobile: string } = {
   src: "/video/spits.mp4",
   webm: null, // e.g. "/video/spits.webm"
   poster: "/images/lamb-plate.jpg",
+  // Phones get a portrait photo: a wide one cropped to a tall screen shows only a sliver.
+  posterMobile: "/images/meat-pack.jpg",
 };
 
 /** Client-confirmed: only the lamb is claimed as halal; show it as a compact sticker. */

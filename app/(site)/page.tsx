@@ -140,14 +140,13 @@ export default async function HomePage() {
         <HeroMedia />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,7,9,.92)_0%,rgba(6,7,9,.72)_38%,rgba(6,7,9,.25)_70%,rgba(6,7,9,.35)_100%)]"
+          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,16,38,.82)_0%,rgba(6,16,38,.55)_45%,rgba(6,16,38,.35)_70%,rgba(6,16,38,.75)_100%)] sm:bg-[linear-gradient(90deg,rgba(6,16,38,.92)_0%,rgba(6,16,38,.72)_38%,rgba(6,16,38,.25)_70%,rgba(6,16,38,.35)_100%)]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,24,58,.75)_0%,rgba(7,24,58,0)_28%,rgba(6,7,9,0)_60%,rgba(6,7,9,.95)_100%)]"
+          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,24,58,.75)_0%,rgba(7,24,58,0)_28%,rgba(4,10,23,0)_60%,rgba(4,10,23,.95)_100%)]"
         />
         <div className="firelight !mix-blend-soft-light" aria-hidden="true" />
-        <CoalBed className="!h-[clamp(120px,17vw,210px)]" />
         <EmberCanvas tone="dark" rate={38} band={0.14} motes={16} stokeOnPointer stokeOnScroll />
 
         <div className="container-x relative z-10 flex min-h-[100svh] flex-col justify-end pb-[clamp(9rem,17vw,13rem)] pt-40">
@@ -262,8 +261,6 @@ export default async function HomePage() {
                     className="arch__img object-[50%_60%]"
                   />
                   <div className="arch__shade" />
-                  <div className="firelight" />
-                  <CoalBed />
                   <EmberCanvas tone="dark" rate={34} band={0.14} motes={5} stokeOnPointer />
                 </div>
               </div>
@@ -310,7 +307,7 @@ export default async function HomePage() {
                 data-reveal
                 style={{ "--d": `${i * 90}ms` } as React.CSSProperties}
               >
-                <div className="relative aspect-[4/5] overflow-hidden">
+                <div className="relative aspect-[5/4] overflow-hidden sm:aspect-[4/5]">
                   <Image
                     src={s.img}
                     alt={s.alt}
@@ -369,8 +366,8 @@ export default async function HomePage() {
             <div className="relative" data-reveal="scale">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[30px] shadow-[0_0_0_1px_rgba(255,255,255,.12),0_40px_80px_-30px_rgba(255,90,20,.45)]">
                 <Image
-                  src="/images/meat-pack.jpg"
-                  alt="A tray of charcoal-crusted meat with salad and garlic sauce"
+                  src="/images/platter-topdown.jpg"
+                  alt="A plate of charcoal meat with salad, chips, pita and garlic sauce on the table"
                   fill
                   sizes="(min-width: 1024px) 560px, 92vw"
                   className="object-cover object-[70%_50%]"

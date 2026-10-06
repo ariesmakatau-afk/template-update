@@ -19,7 +19,7 @@ const ORDERS: Order[] = [
   {
     label: "Lamb & Garlic",
     title: "Lamb Yiros, double garlic attitude",
-    lines: [{ cfg: { productId: "yiros", sizeId: "regular", meats: ["lamb"], sauces: ["Garlic"], extras: ["cooked-onion"] }, qty: 1 }],
+    lines: [{ cfg: { productId: "yiros", sizeId: "regular", meats: ["lamb"], sauces: ["Garlic"], extras: [] }, qty: 1 }],
   },
   {
     label: "The Full Mix",

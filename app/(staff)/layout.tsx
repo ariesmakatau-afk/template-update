@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
+  // Adding a staff page to the Home Screen opens the kitchen board, not the
+  // public site — that installed copy is what iPhone push needs.
+  manifest: "/kitchen.webmanifest",
 };
 
 /** Staff screens: no public header/footer, nothing indexed. */

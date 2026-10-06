@@ -52,7 +52,7 @@ function useWakeLock(active: boolean) {
   }, [active]);
 }
 
-export default function KitchenBoard() {
+export default function KitchenBoard({ isAdmin = false }: { isAdmin?: boolean }) {
   const [orders, setOrders] = useState<Order[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -263,7 +263,7 @@ export default function KitchenBoard() {
   return (
     <StaffShell
       dark
-      showAdmin={false}
+      showAdmin={isAdmin}
       right={
         <>
           <span className="mr-1 hidden font-serif text-2xl tabular-nums text-white/90 sm:inline">{wallNow}</span>

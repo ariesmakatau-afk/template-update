@@ -13,7 +13,7 @@ import {
   SAUCE_PRICE,
   type ProductGroup,
 } from "@/lib/menu";
-import { groupPhotos } from "@/lib/menu-media";
+import { groupPhotos, productPhotos } from "@/lib/menu-media";
 import { site } from "@/lib/site";
 import { isConfigured, readOrderingSettings } from "@/lib/content-store";
 import PageHero from "@/components/sections/PageHero";
@@ -65,6 +65,7 @@ function Group({ g, index }: { g: ProductGroup; index: number }) {
       <div className="mt-6 divide-y divide-line">
         {g.products.map((p, i) => {
           const lamb = lambSurchargeLabel(p);
+          const thumb = productPhotos[p.id];
           return (
             <article
               key={p.id}
@@ -75,10 +76,15 @@ function Group({ g, index }: { g: ProductGroup; index: number }) {
               data-reveal
               style={{ "--d": `${i * 50}ms` } as React.CSSProperties}
             >
-              <div className="flex items-baseline">
+              <div className={`flex ${thumb ? "items-center" : "items-baseline"}`}>
+                {thumb && (
+                  <span className="relative mr-3 block h-11 w-11 shrink-0 overflow-hidden rounded-full shadow-[0_0_0_1.5px_var(--blue),0_0_0_3.5px_#fff,0_0_0_4.5px_var(--line)]">
+                    <Image src={thumb.src} alt="" fill sizes="44px" className="object-cover" />
+                  </span>
+                )}
                 <h3 className="font-serif text-[1.8rem] leading-none text-blue-navy">{p.name}</h3>
                 <span className="leader" aria-hidden="true" />
-                <span className="price">{priceRange(p)}</span>
+                <span className="price whitespace-nowrap">{priceRange(p)}</span>
               </div>
               <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
                 <div className="min-w-0">

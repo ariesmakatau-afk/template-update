@@ -12,7 +12,7 @@
  *   "denied"     the browser says no
  */
 
-export type PushMode = "push" | "tab" | "ios-install" | "denied" | "off";
+export type PushMode = "push" | "tab" | "ios-install" | "ios-tab" | "denied" | "off";
 
 const LS_PREFIX = "yiannis:push:";
 
@@ -59,7 +59,19 @@ async function armPermission(): Promise<NotificationPermission> {
   }
 }
 
+/** iPhone/iPad in a browser tab (not opened from the Home Screen). */
+function iosTab(): boolean {
+  const ua = navigator.userAgent;
+  const ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  const standalone = matchMedia("(display-mode: standalone)").matches || (navigator as Navigator & { standalone?: boolean }).standalone === true;
+  return ios && !standalone;
+}
+
 export async function enablePushFor(orderRef: string): Promise<PushMode> {
+  // iOS has no notifications at all in a browser tab — asking would only ever
+  // look like "blocked". The kitchen installs the board to the Home Screen;
+  // a customer keeps the tracker open (an installed copy wouldn't know the order).
+  if (iosTab()) return orderRef === "kitchen" ? "ios-install" : "ios-tab";
   const permission = await armPermission();
   if (permission !== "granted") {
     remember(orderRef, null);

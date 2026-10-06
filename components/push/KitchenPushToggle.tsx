@@ -31,7 +31,7 @@ export default function KitchenPushToggle({ className = "" }: { className?: stri
       : mode === "tab"
         ? "🔔 Device alerts: ON (tab open)"
         : mode === "ios-install"
-          ? "📲 iPhone: add to Home Screen, then tap again"
+          ? "📲 iPhone: Share → Add to Home Screen, open it from there, tap again"
           : mode === "denied"
             ? "🔕 Alerts blocked in browser"
             : "📲 Wake my phone for new orders";

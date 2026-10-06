@@ -38,7 +38,15 @@ export default function HeroMedia() {
         fill
         priority
         sizes="100vw"
-        className={`object-cover object-[65%_50%] transition-opacity duration-[1800ms] ease-out ${hasVideo ? "" : "hero-drift"} ${playing ? "opacity-0" : "opacity-100"}`}
+        className={`hidden object-cover object-[65%_50%] transition-opacity duration-[1800ms] ease-out sm:block ${hasVideo ? "" : "hero-drift"} ${playing ? "opacity-0" : "opacity-100"}`}
+      />
+      <Image
+        src={heroVideo.posterMobile}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className={`object-cover object-[50%_60%] transition-opacity duration-[1800ms] ease-out sm:hidden ${playing ? "opacity-0" : "opacity-100"}`}
       />
       {hasVideo && (
         <video

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import OrderCode from "./OrderCode";
 import { formatMoney } from "@/lib/menu";
 import { describe, productById, unitPrice } from "@/lib/order";
 import { pickupSlots } from "@/lib/hours";
@@ -139,10 +140,12 @@ export default function Checkout() {
             </a>
           </div>
           {sent.orderId && (
-            <p className="mt-5 text-sm text-muted">
-              The tracking page shows your wait time as soon as the kitchen accepts — and the 📲 on it can buzz your phone the
-              moment anything moves, even with the browser shut.
-            </p>
+            <>
+              <OrderCode id={sent.orderId} />
+              <p className="mt-4 text-sm text-muted">
+                The tracking page shows your wait time as soon as the kitchen accepts.
+              </p>
+            </>
           )}
         </div>
       ) : (

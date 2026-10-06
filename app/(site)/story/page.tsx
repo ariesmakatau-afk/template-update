@@ -71,7 +71,7 @@ export default function StoryPage() {
         <div className="container-x grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
           <div className="relative" data-reveal="scale">
             <div className="arch-frame mx-auto max-w-[460px]">
-              <div className="arch aspect-[4/5]">
+              <div className="arch aspect-[4/3]">
                 <Image
                   src="/images/storefront.jpg"
                   alt="Yianni's Hellenic Yiros shopfront on Hindley Street — blue and white, Spartan helmets, EST-2002"

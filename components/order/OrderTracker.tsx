@@ -6,6 +6,7 @@ import { formatMoney } from "@/lib/menu";
 import { site } from "@/lib/site";
 import { IconPhone } from "../Icons";
 import OrderPushToggle from "../push/OrderPushToggle";
+import OrderCode from "./OrderCode";
 
 type Item = { name: string; detail?: string; quantity: number; unitPrice?: number; notes?: string };
 type Order = {
@@ -145,6 +146,7 @@ export default function OrderTracker({ id }: { id: string }) {
         {detail}
         {busyAside && <span className="mt-1 block text-[0.85rem] font-semibold text-amber">{busyAside}</span>}
       </p>
+      <OrderCode id={id} tone="dark" />
 
       {!rejected && (
         <ol className="mx-auto mt-10 grid max-w-md grid-cols-3 gap-2" aria-label="Order progress">

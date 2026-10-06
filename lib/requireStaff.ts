@@ -30,7 +30,9 @@ export async function requireStaffPage(next: string, need?: Role): Promise<LiveS
     redirect(`/staff?next=${encodeURIComponent(next)}`);
   }
   if (need === "admin" && session.role !== "admin") {
-    redirect("/kitchen");
+    // Signed in as staff: ask for the admin password rather than silently
+    // landing on the kitchen board.
+    redirect(`/staff?next=${encodeURIComponent(next)}&need=admin`);
   }
   return session;
 }
