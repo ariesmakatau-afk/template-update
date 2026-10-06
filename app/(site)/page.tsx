@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { award, houseNumbers, rating, site } from "@/lib/site";
 import { allProducts, priceRange } from "@/lib/menu";
-import { readDeal, readPhotos } from "@/lib/content-store";
+import { readPhotos } from "@/lib/content-store";
 import CoalBed from "@/components/fire/CoalBed";
 import EmberCanvas from "@/components/fire/EmberCanvas";
 import CountUp from "@/components/CountUp";
@@ -28,6 +28,7 @@ import BoundaryCountdown from "@/components/widgets/BoundaryCountdown";
 import SpinForIt from "@/components/widgets/SpinForIt";
 import OrderLookup from "@/components/widgets/OrderLookup";
 import { IconArrow, IconStar } from "@/components/Icons";
+import { DealBanner } from "@/components/Deal";
 
 // Staff and customer photos uploaded in /admin show up within a minute.
 export const revalidate = 30;
@@ -129,11 +130,7 @@ function Stars({ className = "h-3.5 w-3.5" }: { className?: string }) {
 }
 
 export default async function HomePage() {
-  const [team, customers, deal] = await Promise.all([
-    readPhotos("team", { revalidate: 30 }),
-    readPhotos("customers", { revalidate: 30 }),
-    readDeal({ revalidate: 30 }),
-  ]);
+  const [team, customers] = await Promise.all([readPhotos("team", { revalidate: 30 }), readPhotos("customers", { revalidate: 30 })]);
 
   return (
     <>
@@ -154,16 +151,7 @@ export default async function HomePage() {
         <EmberCanvas tone="dark" rate={38} band={0.14} motes={16} stokeOnPointer stokeOnScroll />
 
         <div className="container-x relative z-10 flex min-h-[100svh] flex-col justify-end pb-[clamp(9rem,17vw,13rem)] pt-40">
-          {deal.on && deal.banner && (
-            <Link
-              href="/menu#deal"
-              className="fade-up mb-5 flex w-fit max-w-full items-center gap-3 rounded-full bg-white py-1.5 pl-1.5 pr-4 text-sm font-bold text-blue-navy shadow-lg transition hover:bg-mist"
-            >
-              <span className="shrink-0 rounded-full bg-blue px-2.5 py-1 text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-white">Deal</span>
-              <span className="min-w-0">{deal.banner}</span>
-              <IconArrow />
-            </Link>
-          )}
+          <DealBanner />
           <div className="fade-up flex flex-wrap items-center gap-2.5">
             <OpenStatus />
             <BoundaryCountdown />

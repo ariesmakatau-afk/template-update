@@ -1,5 +1,4 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { revalidatePath } from "next/cache";
 import { isAdmin } from "@/lib/requireStaff";
 import { isConfigured } from "@/lib/supabase";
 import { writeDeal } from "@/lib/content-store";
@@ -25,8 +24,6 @@ export async function PUT(request: NextRequest) {
   if (deal.on && !deal.banner) return NextResponse.json({ error: "Write the banner line first." }, { status: 400 });
   try {
     await writeDeal(deal);
-    revalidatePath("/");
-    revalidatePath("/menu");
     return NextResponse.json(deal);
   } catch (err) {
     console.error("[admin/deal] save failed:", err);

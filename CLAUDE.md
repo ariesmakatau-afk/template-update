@@ -110,6 +110,7 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - **Deal:** set in `/admin` → Deal (on/off switch, one banner line, optional full details).
   - The banner shows at the top of the home page.
   - The full deal shows at the top of `/menu` (`/menu#deal`), and the banner links there.
+  - Both load the deal fresh in the browser (`/api/deal`), not from the page cache, so turning it off or editing it shows on the next page load. (The first version was cached and the home banner lagged behind.)
 - The home page Parea section has a line pointing people to the photos on `/parea`.
 - Customers see their order tracking code at checkout and on the tracker page.
 - Push notifications on iPhone only work if the kitchen board is added to the **Home Screen** from Safari. A plain Safari tab can't receive them.
